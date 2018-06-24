@@ -178,7 +178,7 @@ ax3.grid(True)
 ```
 
 # Picture
-
+![candle chart](https://github.com/YourongYe/Quant-project/blob/master/Candle%20pic.png)
     
 
 
