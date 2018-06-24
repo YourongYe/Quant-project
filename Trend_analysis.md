@@ -1,4 +1,6 @@
-
+# Trend strength
+Trend strength indicator based on moving average
+```py
 # import library
 import pandas as pd
 import numpy as np
@@ -100,7 +102,83 @@ data = data.set_index('Time')
 data = data.reindex(columns=['Open','Close','High','Low','Volume','1-5 MA','1-10 MA','5_vol','10_vol'])
 trendindex_data = data.iloc[102:,:]
 trendindex_data.to_csv(dir_path+'trend.csv')
-      
+```
+# Test
+Candle line with trend strength indicator and volume
+```py
+# -*- coding:utf-8 -*-
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import mpl_finance as mpf
+from matplotlib.pylab import date2num
+import datetime
+import pandas as pd
+#%matplotlib inline
+
+plt.rcParams['font.serif'] = ['KaiTi']     #用来正常显示中文
+plt.rcParams['axes.unicode_minus'] = False #用来正常显示负号
+import seaborn as sns
+sns.set_style({"font.sans-serif":['KaiTi', 'Arial']},{"axes.unicode_minus":False})
+
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+print("running under："+dir_path)
+def clear():os.system('cls')
+
+# import data
+data = pd.read_csv(dir_path+'/趋势强度数据.csv')
+
+def date_to_num(dates):
+    num_time = []
+    for date in dates:
+        date_time = datetime.datetime.strptime(date,'%Y/%m/%d')
+        num_date = date2num(date_time)
+        num_time.append(num_date)
+    return num_time
+
+# dataframe转换为二维数组
+mat_data = data.as_matrix()
+num_time = date_to_num(mat_data[:,0])
+mat_data[:,0] = num_time
+
+# 绘制K线图
+fig = plt.figure(figsize=(15,8))
+#fig, (ax1, ax2, ax3) = plt.subplots(3, sharex=True, figsize=(15,8))
+#plt.grid(True)
+
+# x,y axis
+#plt.xticks(rotation=30) #设置日期刻度旋转的角度 
+#plt.title('000725 2017-18')
+#plt.xlabel('Date')
+
+# x轴的刻度为日期
+ax1 = fig.add_subplot(211)
+mpf.candlestick_ochl(ax1, mat_data, width=1.0, colorup = 'r', colordown = 'g')
+ax1.set_ylabel('Price')
+ax1.xaxis_date()
+#ax1.set_xticks([]) 
+ax1.grid(True)
+
+# 成交量
+ax2 = fig.add_subplot(413)
+plt.bar(mat_data[:,0], mat_data[:,-5], width=0.5)
+ax2.set_ylabel('Volume')
+#ax2.set_xticks([]) 
+ax2.grid(True)
+ax2.xaxis_date()
+
+#1-5MA,1-10MA
+ax3 = fig.add_subplot(414)
+plt.plot(mat_data[:,0], mat_data[:,-4],label = "1-5MA",linewidth = '1')
+plt.plot(mat_data[:,0], mat_data[:,-3],label = "1-10MA",linewidth = '1')
+plt.legend() # 显示图例
+ax3.set_ylabel('Trend_strength')
+ax3.xaxis_date()
+ax3.grid(True)
+```
+
+# Picture
+
     
 
 
