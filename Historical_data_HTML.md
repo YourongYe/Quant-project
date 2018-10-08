@@ -249,6 +249,8 @@ if __name__ == '__main__':
 ```
 
 # Picture
+https://yourongye.github.io/Quant-project/
+
 ![candle chart](https://github.com/YourongYe/Quant-project/blob/master/Stock%20Prices.png)
     
 
