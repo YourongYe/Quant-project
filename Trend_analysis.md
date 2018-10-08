@@ -249,7 +249,7 @@ if __name__ == '__main__':
 ```
 
 # Picture
-![candle chart](https://github.com/YourongYe/Quant-project/blob/master/Candle%20pic.png)
+![candle chart](htmlpreview.github.io/?Quant-project/index.html)
     
 
 
