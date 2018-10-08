@@ -249,7 +249,7 @@ if __name__ == '__main__':
 ```
 
 # Picture
-![candle chart](htmlpreview.github.io/?Quant-project/index.html)
+![candle chart](https://yourongye.github.io/Quant-project/)
     
 
 
